@@ -1,15 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using UnityEngine;
 
 public class Inventory
 {
     public readonly int MaxSize;
 
-    private List<Item> _items = new();
+    private List<Cell> _cells = new List<Cell>();
 
-    public Inventory(Item[] items, int maxSize)
+    public Inventory(List<Item> items, int maxSize)
     {
         if (maxSize <= 0)
             throw new ArgumentOutOfRangeException(nameof(maxSize), "The value cannot be negative or zero.");
@@ -20,55 +19,65 @@ public class Inventory
             Add(item);
     }
 
-    public int CurrentSize => _items.Sum(item => item.Count);
+    public IReadOnlyList<Cell> Cells => _cells;
+
+    public int CurrentSize => _cells.Sum(cell => cell.Count);
 
     public void Add(Item item)
     {
-        if (CurrentSize + item.Count > MaxSize)
+        if (CurrentSize + 1 > MaxSize)
             throw new ArgumentOutOfRangeException(nameof(MaxSize), "The value cannot be greater than the max size.");
 
-        Item existingItem = _items.FirstOrDefault(existing => existing.ID == item.ID);
+        Cell existingCell = _cells.FirstOrDefault(existingCell => existingCell.Items[0].ID == item.ID);
 
-        if (existingItem != null)
-            existingItem.Count += item.Count;
+        if (existingCell != null)
+            existingCell.Add(item);
         else
-            _items.Add(item);
+            _cells.Add(new Cell(item));
     }
 
     public void Remove(int id, int count)
     {
-        Item existingItem = _items.FirstOrDefault(existing => existing.ID == id);
+        Cell existingCell = _cells.FirstOrDefault(existingCell => existingCell.Items[0].ID == id);
 
-        if (existingItem == null)
-            throw new NullReferenceException(nameof(existingItem));
+        if (existingCell == null)
+            throw new NullReferenceException(nameof(existingCell));
 
-        if (existingItem.Count < count)
+        if (existingCell.Count < count)
             throw new ArgumentOutOfRangeException(nameof(count), "The value cannot be greater than the max count.");
 
-        existingItem.Count -= count;
+        existingCell.Remove(count);
 
-        if (existingItem.Count == 0)
-            _items.Remove(existingItem);
+        if (existingCell.Count == 0)
+            _cells.Remove(existingCell);
     }
+}
 
-    public void ShowAllItems()
+public class Cell
+{
+    private List<Item> _items = new List<Item>();
+
+    public Cell(Item item)
     {
-        foreach (Item item in _items)
-        {
-            Debug.Log($"Item ID: {item.ID}, Item count: {item.Count}");
-        }
+        Add(item);
     }
+
+    public IReadOnlyList<Item> Items => _items;
+
+    public int Count => _items.Count;
+
+    public void Add(Item item) => _items.Add(item);
+
+    public void Remove(int count) => _items.RemoveRange(_items.Count - count, count);
 }
 
 public class Item
 {
     private int _id;
-    private int _count;
 
-    public Item(int id, int count)
+    public Item(int id)
     {
         ID = id;
-        Count = count;
     }
 
     public int ID
@@ -79,17 +88,6 @@ public class Item
             if (value <= 0)
                 throw new System.ArgumentException("ID cannot be negative or zero.");
             _id = value;
-        }
-    }
-
-    public int Count
-    {
-        get => _count;
-        set
-        {
-            if (value <= 0)
-                throw new System.ArgumentException("Item count cannot be negative or zero.");
-            _count = value;
         }
     }
 }
