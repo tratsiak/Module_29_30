@@ -394,7 +394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &622764867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,7 +439,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &630918883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,42 +459,25 @@ MonoBehaviour:
     type: 3}
   _dragonPrefab: {fileID: 429867782348309943, guid: 9416ffba987372643b29865be91f2682,
     type: 3}
-  _orkSettings:
-  - <Health>k__BackingField: 10
-    <Damage>k__BackingField: 20
-    <RageLevel>k__BackingField: 50
-  - <Health>k__BackingField: 15
-    <Damage>k__BackingField: 25
-    <RageLevel>k__BackingField: 100
-  - <Health>k__BackingField: 20
-    <Damage>k__BackingField: 30
-    <RageLevel>k__BackingField: 150
-  _elfSettings:
-  - <Health>k__BackingField: 5
-    <Damage>k__BackingField: 50
-    <Agility>k__BackingField: 20
-    <MagicPower>k__BackingField: 100
-  - <Health>k__BackingField: 10
-    <Damage>k__BackingField: 60
-    <Agility>k__BackingField: 25
-    <MagicPower>k__BackingField: 200
-  - <Health>k__BackingField: 15
-    <Damage>k__BackingField: 70
-    <Agility>k__BackingField: 30
-    <MagicPower>k__BackingField: 300
-  _dragonSettings:
-  - <Health>k__BackingField: 100
-    <Damage>k__BackingField: 200
-    <FireBreathDamage>k__BackingField: 50
-    <FlightSpeed>k__BackingField: 120
-  - <Health>k__BackingField: 200
-    <Damage>k__BackingField: 300
-    <FireBreathDamage>k__BackingField: 70
-    <FlightSpeed>k__BackingField: 135
-  - <Health>k__BackingField: 300
-    <Damage>k__BackingField: 400
-    <FireBreathDamage>k__BackingField: 90
-    <FlightSpeed>k__BackingField: 150
+  _enemySettings:
+    _orkSettings:
+    - <RageLevel>k__BackingField: 10
+    - <RageLevel>k__BackingField: 20
+    - <RageLevel>k__BackingField: 30
+    _elfSettings:
+    - <Agility>k__BackingField: 10
+      <MagicPower>k__BackingField: 20
+    - <Agility>k__BackingField: 30
+      <MagicPower>k__BackingField: 40
+    - <Agility>k__BackingField: 50
+      <MagicPower>k__BackingField: 60
+    _dragonSettings:
+    - <FireBreathDamage>k__BackingField: 100
+      <FlightSpeed>k__BackingField: 150
+    - <FireBreathDamage>k__BackingField: 200
+      <FlightSpeed>k__BackingField: 250
+    - <FireBreathDamage>k__BackingField: 300
+      <FlightSpeed>k__BackingField: 350
 --- !u!4 &630918884
 Transform:
   m_ObjectHideFlags: 0

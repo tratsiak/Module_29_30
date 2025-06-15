@@ -2,18 +2,10 @@ public class Ork : Enemy
 {
     private int _rageLevel;
 
-    public override void Initialize(EnemySettings settings)
+    public void Initialize(OrkSettings settings)
     {
-        base.Initialize(settings);
-
-        if (settings is OrkSettings orkSettings)
-            _rageLevel = orkSettings.RageLevel;
+        _rageLevel = settings.RageLevel;
     }
 
-    public override string GetInfo()
-    {
-        string baseInfo = base.GetInfo();
-
-        return $"{baseInfo}, RageLevel: {_rageLevel}.";
-    }
+    public override string GetInfo() => $"RageLevel: {_rageLevel}.";
 }

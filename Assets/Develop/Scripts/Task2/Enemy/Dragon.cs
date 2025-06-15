@@ -3,21 +3,11 @@ public class Dragon : Enemy
     private int _fireBreathDamage;
     private int _flightSpeed;
 
-    public override void Initialize(EnemySettings settings)
+    public void Initialize(DragonSettings settings)
     {
-        base.Initialize(settings);
-
-        if (settings is DragonSettings dragonSettings)
-        {
-            _fireBreathDamage = dragonSettings.FireBreathDamage;
-            _flightSpeed = dragonSettings.FlightSpeed;
-        }
+        _fireBreathDamage = settings.FireBreathDamage;
+        _flightSpeed = settings.FlightSpeed;
     }
 
-    public override string GetInfo()
-    {
-        string baseInfo = base.GetInfo();
-
-        return $"{baseInfo}, FireBreathDamage: {_fireBreathDamage}, FlightSpeed: {_flightSpeed}.";
-    }
+    public override string GetInfo() => $"FireBreathDamage: {_fireBreathDamage}, FlightSpeed: {_flightSpeed}.";
 }
