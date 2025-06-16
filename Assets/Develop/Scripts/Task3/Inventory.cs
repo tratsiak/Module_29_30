@@ -19,7 +19,7 @@ public class Inventory
             Add(item);
     }
 
-    public IReadOnlyList<Cell> Cells => _cells;
+    public IReadOnlyList<IReadOnlyCell> Cells => _cells;
 
     public int CurrentSize => _cells.Sum(cell => cell.Count);
 
@@ -53,7 +53,7 @@ public class Inventory
     }
 }
 
-public class Cell
+public class Cell : IReadOnlyCell
 {
     private List<Item> _items = new List<Item>();
 

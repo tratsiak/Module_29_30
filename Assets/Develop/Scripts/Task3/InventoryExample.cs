@@ -23,16 +23,16 @@ public class InventoryExample : MonoBehaviour
         _inventory.Add(new Item(2));
         _inventory.Add(new Item(4));
 
-        foreach (Cell cell in _inventory.Cells)
+        foreach (IReadOnlyCell cell in _inventory.Cells)
         {
-            Debug.Log($"Количество предметов с ID:{cell.Items[0].ID} - {cell.Count}");
+            Debug.Log($"Count of items with ID:{cell.Items[0].ID} - {cell.Count}");
         }
 
         _inventory.Remove(2, 2);
 
-        foreach (Cell cell in _inventory.Cells)
+        foreach (IReadOnlyCell cell in _inventory.Cells)
         {
-            Debug.Log($"Количество предметов с ID:{cell.Items[0].ID} - {cell.Count}");
+            Debug.Log($"Count of items with ID:{cell.Items[0].ID} - {cell.Count}");
         }
     }
 }
